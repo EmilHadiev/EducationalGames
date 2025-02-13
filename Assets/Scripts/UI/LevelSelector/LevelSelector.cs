@@ -10,7 +10,9 @@ public class LevelSelector : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_Text _descriptionText;
     [SerializeField] private Image _levelImage;
 
-    public event Action Clicked;
+    private LevelSelectorData _data;
+
+    public event Action<LevelSelectorData> Clicked;
 
     private void OnValidate()
     {
@@ -21,15 +23,16 @@ public class LevelSelector : MonoBehaviour, IPointerClickHandler
 
     public void Initialize(LevelSelectorData data)
     {
-        _levelImage.sprite = data.Sprite;
-        _descriptionText.text = data.Description;
+        _data = data;
+        _levelImage.sprite = _data.Sprite;
+        _descriptionText.text = _data.Name;
     }
 
     public void BackgroundToggle(bool isOn) => _backgroundImage.enabled = isOn;
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Clicked?.Invoke();
+        Clicked?.Invoke(_data);
         BackgroundToggle(true);
     }
 }
