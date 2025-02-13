@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "LevelData", menuName = "level/LevelData")]
+[CreateAssetMenu(fileName = "LevelData", menuName = "Level/LevelData")]
 public class LevelSelectorData : ScriptableObject
 {
     [field: SerializeField] public Sprite Sprite { get; private set; }

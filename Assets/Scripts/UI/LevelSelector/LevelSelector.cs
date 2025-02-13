@@ -21,10 +21,7 @@ public class LevelSelector : MonoBehaviour, IPointerClickHandler
         _levelImage ??= GetComponentInChildren<Image>();
     }
 
-    private void Start()
-    {
-        Click();
-    }
+    private void Start() => Click();
 
     public void Initialize(LevelSelectorData data)
     {
