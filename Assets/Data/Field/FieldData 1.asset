@@ -17,9 +17,9 @@ MonoBehaviour:
   _answerOptions:
   - <Answer>k__BackingField: "12 \u0430\u043F\u0440\u0435\u043B\u044F"
     <IsCorrect>k__BackingField: 1
-  - <Answer>k__BackingField: 
+  - <Answer>k__BackingField: "16 \u0430\u0432\u0433\u0443\u0441\u0442\u0430"
     <IsCorrect>k__BackingField: 0
-  - <Answer>k__BackingField: 
+  - <Answer>k__BackingField: "21 \u0438\u044E\u043D\u044F"
     <IsCorrect>k__BackingField: 0
-  - <Answer>k__BackingField: 
+  - <Answer>k__BackingField: "19 \u0444\u0435\u0432\u0440\u0430\u043B\u044F"
     <IsCorrect>k__BackingField: 0

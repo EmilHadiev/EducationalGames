@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3894682cd79462f4f9229f373345f281, type: 3}
   m_Name: FieldData 10
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: 
+  <Description>k__BackingField: "\u041A\u0442\u043E \u0438\u0437 \u043F\u0435\u0440\u0435\u0447\u0438\u0441\u043B\u0435\u043D\u043D\u044B\u0445
+    \u0436\u0438\u0432\u043E\u0442\u043D\u044B\u0445 \u043D\u0435 \u0431\u044B\u0432\u0430\u043B
+    \u0432 \u043A\u043E\u0441\u043C\u043E\u0441\u0435?"
   _answerOptions:
-  - <Answer>k__BackingField: 
+  - <Answer>k__BackingField: "\u041C\u0435\u0434\u0432\u0435\u0434\u044C"
+    <IsCorrect>k__BackingField: 1
+  - <Answer>k__BackingField: "\u041E\u0431\u0435\u0437\u044C\u044F\u043D\u0430"
     <IsCorrect>k__BackingField: 0
-  - <Answer>k__BackingField: 
+  - <Answer>k__BackingField: "\u0427\u0435\u0440\u0435\u043F\u0430\u0445\u0430"
     <IsCorrect>k__BackingField: 0
-  - <Answer>k__BackingField: 
-    <IsCorrect>k__BackingField: 0
-  - <Answer>k__BackingField: 
+  - <Answer>k__BackingField: "\u0421\u043E\u0431\u0430\u043A\u0430"
     <IsCorrect>k__BackingField: 0

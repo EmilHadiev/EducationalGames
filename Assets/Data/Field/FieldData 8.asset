@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3894682cd79462f4f9229f373345f281, type: 3}
   m_Name: FieldData 8
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: 
+  <Description>k__BackingField: "\u041D\u0430\u0437\u043E\u0432\u0438\u0442\u0435
+    \u043B\u0435\u0442\u0430\u043B\u044C\u043D\u044B\u0439 \u0430\u043F\u043F\u0430\u0440\u0430\u0442"
   _answerOptions:
-  - <Answer>k__BackingField: 
+  - <Answer>k__BackingField: "\u0421\u0430\u043C\u043E\u043B\u0435\u0442"
+    <IsCorrect>k__BackingField: 1
+  - <Answer>k__BackingField: "\u041C\u0430\u0448\u0438\u043D\u0430"
     <IsCorrect>k__BackingField: 0
-  - <Answer>k__BackingField: 
+  - <Answer>k__BackingField: "\u0412\u0435\u043B\u043E\u0441\u0438\u043F\u0435\u0434"
     <IsCorrect>k__BackingField: 0
-  - <Answer>k__BackingField: 
-    <IsCorrect>k__BackingField: 0
-  - <Answer>k__BackingField: 
+  - <Answer>k__BackingField: "\u041A\u043E\u043D\u044C\u043A\u0438"
     <IsCorrect>k__BackingField: 0
