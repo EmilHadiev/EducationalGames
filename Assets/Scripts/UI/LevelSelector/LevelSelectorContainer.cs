@@ -5,6 +5,7 @@ public class LevelSelectorContainer : MonoBehaviour
 {
     [SerializeField] private LevelSelector _levelSelectorTemplate;
     [SerializeField] private Transform _container;
+    [SerializeField] private LevelSelectorData[] _selectorsData;
 
     private const int MaxSize = 3;
 
@@ -31,12 +32,13 @@ public class LevelSelectorContainer : MonoBehaviour
     private void CreateTemplates()
     {
         for (int i = 0; i < MaxSize; i++)
-            CreateTemplate(_levelSelectorTemplate);
+            CreateTemplate(_levelSelectorTemplate, _selectorsData[i]);
     }
 
-    private void CreateTemplate(LevelSelector levelSelectorTemplate)
+    private void CreateTemplate(LevelSelector levelSelectorTemplate, LevelSelectorData data)
     {
         LevelSelector levelSelector = Instantiate(levelSelectorTemplate, _container);
+        levelSelector.Initialize(data);
         _selectors.Add(levelSelector);
     }
 

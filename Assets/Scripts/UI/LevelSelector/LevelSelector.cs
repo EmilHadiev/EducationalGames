@@ -19,10 +19,10 @@ public class LevelSelector : MonoBehaviour, IPointerClickHandler
         _levelImage ??= GetComponentInChildren<Image>();
     }
 
-    public void Initialize(Image levelImage, TMP_Text descriptionText)
+    public void Initialize(LevelSelectorData data)
     {
-        _levelImage = levelImage;
-        _descriptionText = descriptionText;
+        _levelImage.sprite = data.Sprite;
+        _descriptionText.text = data.Description;
     }
 
     public void BackgroundToggle(bool isOn) => _backgroundImage.enabled = isOn;

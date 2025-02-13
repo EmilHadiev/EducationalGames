@@ -197,42 +197,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92076331}
   m_CullTransparentMesh: 1
---- !u!1 &175308290
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 175308291}
-  m_Layer: 5
-  m_Name: LevelSelectorsContainer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &175308291
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 175308290}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 419371402}
-  m_Father: {fileID: 545884307}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.3884985}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00088500977, y: -2.1766052}
-  m_SizeDelta: {x: 0.6300049, y: 3.833313}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &269593270
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,12 +363,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 175308291}
+  m_Father: {fileID: 545884307}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.089388065, y: 0.4281796}
-  m_AnchorMax: {x: 0.89500004, y: 0.86043024}
-  m_AnchoredPosition: {x: -0.33789062, y: 1.7901001}
-  m_SizeDelta: {x: 1, y: 5}
+  m_AnchorMin: {x: 0.086, y: 0.649433}
+  m_AnchorMax: {x: 0.8868325, y: 0.91871655}
+  m_AnchoredPosition: {x: 2.1580505, y: -1.2224121}
+  m_SizeDelta: {x: 4.507538, y: 1.1999207}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &419371403
 MonoBehaviour:
@@ -420,6 +384,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelSelectorTemplate: {fileID: 4549568054461197907, guid: fba1a2074e3a6de4b988e366e6cd69dc, type: 3}
   _container: {fileID: 419371402}
+  _selectorsData:
+  - {fileID: 11400000, guid: e1197bc2901941d46b62fb69c783de8f, type: 2}
+  - {fileID: 11400000, guid: 5ace47da92540bd4ca90baecab93b701, type: 2}
+  - {fileID: 11400000, guid: 55a4ba7d8120ec94dba1c82ca2f09c77, type: 2}
 --- !u!114 &419371404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -607,7 +575,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 269593271}
-  - {fileID: 175308291}
+  - {fileID: 419371402}
   m_Father: {fileID: 1512267633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7674739, y: 0}
