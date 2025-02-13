@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,8 +11,6 @@ public class LevelSelectorContainer : MonoBehaviour
     private const int MaxSize = 3;
 
     private List<LevelSelector> _selectors;
-
-    public IReadOnlyCollection<LevelSelector> LevelSelectors => _selectors;
 
     private void OnValidate()
     {
@@ -63,8 +60,5 @@ public class LevelSelectorContainer : MonoBehaviour
             _selectors[i].BackgroundToggle(false);
     }
 
-    private void ShowViewData(LevelSelectorData data)
-    {
-        _gameViewContainer.SetData(data);
-    }
+    private void ShowViewData(LevelSelectorData data) => _gameViewContainer.SetData(data);
 }

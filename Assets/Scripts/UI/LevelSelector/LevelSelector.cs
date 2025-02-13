@@ -21,6 +21,11 @@ public class LevelSelector : MonoBehaviour, IPointerClickHandler
         _levelImage ??= GetComponentInChildren<Image>();
     }
 
+    private void Start()
+    {
+        Click();
+    }
+
     public void Initialize(LevelSelectorData data)
     {
         _data = data;
@@ -30,7 +35,9 @@ public class LevelSelector : MonoBehaviour, IPointerClickHandler
 
     public void BackgroundToggle(bool isOn) => _backgroundImage.enabled = isOn;
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData) => Click();
+
+    private void Click()
     {
         Clicked?.Invoke(_data);
         BackgroundToggle(true);
