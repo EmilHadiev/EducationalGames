@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class FieldViewContainer : MonoBehaviour
 {
@@ -9,7 +11,11 @@ public class FieldViewContainer : MonoBehaviour
 
     private const int MaxFields = 10;
 
+    private IScore _score;
+
     private List<FieldView> _fieldViews = new List<FieldView>(MaxFields);
+
+    public event Action<FieldData> Selected;
 
     private void Awake()
     {
@@ -27,6 +33,12 @@ public class FieldViewContainer : MonoBehaviour
     {
         for (int i = 0; i < _fieldViews.Count; i++)
             _fieldViews[i].Clicked -= OnClicked;
+    }
+
+    [Inject]
+    private void Constructor(IScore score)
+    {
+        _score = score;
     }
 
     private void CreateTemplates()
@@ -53,6 +65,8 @@ public class FieldViewContainer : MonoBehaviour
     private void OnClicked(FieldData fieldData)
     {
         StopOtherElements();
+        _score.Add(Constants.Point);
+        Selected?.Invoke(fieldData);
     }
 
     private void StopOtherElements()

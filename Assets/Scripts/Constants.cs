@@ -5,4 +5,5 @@
 
     public const int MaxFieldCorrectAnswers = 1;
     public const int DefaultDuration = 1;
+    public const int Point = 1;
 }
