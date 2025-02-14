@@ -1,17 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
-using Zenject;
 
+[RequireComponent(typeof(CanvasGroup))]
 public class FieldViewContainer : MonoBehaviour
 {
+    [SerializeField] private FieldQuestionAnswerContainer _questionAnswerContainer;
     [SerializeField] private FieldView _fieldViewTemplate;
     [SerializeField] private RawContainer[] _containers;
     [SerializeField] private List<FieldData> _data;
 
     private const int MaxFields = 10;
-
-    private IScore _score;
 
     private List<FieldView> _fieldViews = new List<FieldView>(MaxFields);
 
@@ -20,6 +21,7 @@ public class FieldViewContainer : MonoBehaviour
     private void Awake()
     {
         CreateTemplates();
+        ShuffleData();
         SetData();
     }
 
@@ -27,18 +29,16 @@ public class FieldViewContainer : MonoBehaviour
     {
         for (int i = 0; i < _fieldViews.Count; i++)
             _fieldViews[i].Clicked += OnClicked;
+
+        _questionAnswerContainer.Selected += OnSelected;
     }
 
     private void OnDisable()
     {
         for (int i = 0; i < _fieldViews.Count; i++)
             _fieldViews[i].Clicked -= OnClicked;
-    }
 
-    [Inject]
-    private void Constructor(IScore score)
-    {
-        _score = score;
+        _questionAnswerContainer.Selected -= OnSelected;
     }
 
     private void CreateTemplates()
@@ -62,10 +62,15 @@ public class FieldViewContainer : MonoBehaviour
             _fieldViews[i].Initialize((i + 1).ToString(), _data[i]);
     }
 
+    private void ShuffleData()
+    {
+        Shuffler shuffler = new Shuffler();
+        _data = shuffler.Shuffle(_data).ToList();
+    }
+
     private void OnClicked(FieldData fieldData)
     {
-        StopOtherElements();
-        _score.Add(Constants.Point);
+        //StopOtherElements();
         Selected?.Invoke(fieldData);
     }
 
@@ -73,5 +78,16 @@ public class FieldViewContainer : MonoBehaviour
     {
         for (int i = 0; i < _fieldViews.Count; i++)
             _fieldViews[i].StopWork();
+    }
+
+    private void StartOtherElements()
+    {
+        for (int i = 0; i < _fieldViews.Count; i++)
+            _fieldViews[i].StartWork();
+    }
+
+    private void OnSelected()
+    {
+        StartOtherElements();
     }
 }
