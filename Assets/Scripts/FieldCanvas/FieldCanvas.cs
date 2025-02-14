@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FlashCard : MonoBehaviour
+public class FieldCanvas : MonoBehaviour
 {
     [SerializeField] private Canvas _canvas;
 
