@@ -16,6 +16,6 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("!");
+        Debug.Log(_fieldData.Description);
     }
 }
