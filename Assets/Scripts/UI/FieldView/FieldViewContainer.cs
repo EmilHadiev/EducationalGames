@@ -11,10 +11,22 @@ public class FieldViewContainer : MonoBehaviour
 
     private List<FieldView> _fieldViews = new List<FieldView>(MaxFields);
 
-    private void Start()
+    private void Awake()
     {
         CreateTemplates();
         SetData();
+    }
+
+    private void OnEnable()
+    {
+        for (int i = 0; i < _fieldViews.Count; i++)
+            _fieldViews[i].Clicked += OnClicked;
+    }
+
+    private void OnDisable()
+    {
+        for (int i = 0; i < _fieldViews.Count; i++)
+            _fieldViews[i].Clicked -= OnClicked;
     }
 
     private void CreateTemplates()
@@ -28,7 +40,7 @@ public class FieldViewContainer : MonoBehaviour
 
     private void CreateTemplate(FieldView fieldViewTemplate, RawContainer container)
     {
-        var template = container.PutElement(fieldViewTemplate);
+        var template = Instantiate(fieldViewTemplate, container.transform);
         _fieldViews.Add(template);
     }
 
@@ -36,5 +48,16 @@ public class FieldViewContainer : MonoBehaviour
     {
         for (int i = 0; i < _fieldViews.Count; i++)
             _fieldViews[i].Initialize((i + 1).ToString(), _data[i]);
+    }
+
+    private void OnClicked(FieldData fieldData)
+    {
+        StopOtherElements();
+    }
+
+    private void StopOtherElements()
+    {
+        for (int i = 0; i < _fieldViews.Count; i++)
+            _fieldViews[i].StopWork();
     }
 }

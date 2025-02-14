@@ -11,7 +11,7 @@ public class GameViewContainer : MonoBehaviour
     public void SetData(LevelSelectorData data)
     {
         _nameText.text = data.Name;
-        _topicText.text = Constants.TopicSubject;
+        _topicText.text = Constants.MainTopicName;
         _descriptionText.text = data.Description;
     }
 }
