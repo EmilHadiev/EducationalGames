@@ -10,7 +10,9 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_Text _fieldNumberText;
     [SerializeField] private TMP_Text _filedDescriptionText;
     [SerializeField] private Image _viewImage;
+    [SerializeField] private Image _answerStatusImage;
     [SerializeField] private Color _clickedColor;
+    [SerializeField] private AnswerStatusData _answerStatusData;
     [SerializeField] private Vector3 _rotationPosition = new Vector3(0, 180, 0);
 
     private readonly Vector3 _defaultRotation = new Vector3(0, 0, 0);
@@ -18,8 +20,8 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
     private FieldData _fieldData;
     private Sequence _sequence;
 
-    private bool _isOpen;
     private bool _isWorking;
+    private bool _isClicked;
 
     public event Action<FieldData> Clicked;
 
@@ -27,7 +29,8 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        StartWork();
+        WorkToggle(true);
+
         SetDescription();
         InitializeSequence();
     }
@@ -50,25 +53,32 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
         _fieldData = fieldData;
     }
 
-    public void StartWork() => _isWorking = true;
-
-    public void StopWork() => _isWorking = false;
+    public void WorkToggle(bool isWork) => _isWorking = isWork;
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (_isWorking == false)
-            return;
-
-        if (_isOpen)
+        if (_isWorking == false || _isClicked)
             return;
 
         Clicked?.Invoke(_fieldData);
         _sequence.Play();
+        _isClicked = true;
     }
 
     private void OpenField()
     {
         _fieldNumberText.gameObject.SetActive(false);
         transform.DORotate(_defaultRotation, 0);
+    }
+
+    public bool TrySetAnswerStatus(FieldData fieldData, bool isCorrect)
+    {
+        if (_fieldData != fieldData)
+            return false;
+
+        _answerStatusImage.sprite = _answerStatusData.GetSprite(isCorrect);
+        _answerStatusImage.color = _answerStatusData.GetColor(isCorrect);
+
+        return true;
     }
 }

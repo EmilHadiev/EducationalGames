@@ -9,6 +9,6 @@ public class ScoreInstaller : MonoInstaller
 
     private void BindScore()
     {
-        Container.BindInterfacesTo<Score>().AsSingle();
+        Container.BindInterfacesTo<ScoreContainer>().AsSingle();
     }
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-public class ScoreView : MonoBehaviour
+public class ScoreContainerView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _scoreText;
 

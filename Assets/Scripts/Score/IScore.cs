@@ -6,6 +6,6 @@ public interface IScore
 
     event Action<int> Changed;
 
-    void Add(int point);
+    void Add();
     void Reset();
 }
