@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class FieldViewContainer : MonoBehaviour
@@ -18,6 +19,7 @@ public class FieldViewContainer : MonoBehaviour
     private const int MaxFields = 10;
 
     private List<FieldView> _fieldViews = new List<FieldView>(MaxFields);
+    private SoundContainer _soundContainer;
 
     public event Action<FieldData> Selected;
 
@@ -57,6 +59,12 @@ public class FieldViewContainer : MonoBehaviour
         _tweenShow.Pause();
     }
 
+    [Inject]
+    private void Constructor(SoundContainer soundContainer)
+    {
+        _soundContainer = soundContainer;
+    }
+
     public void Show() => _tweenShow.Restart();
 
     public void Hide() => _tweenHide.Restart();
@@ -84,7 +92,7 @@ public class FieldViewContainer : MonoBehaviour
     private void SetData()
     {
         for (int i = 0; i < _fieldViews.Count; i++)
-            _fieldViews[i].Initialize((i + 1).ToString(), _data[i]);
+            _fieldViews[i].Initialize((i + 1).ToString(), _data[i], _soundContainer);
     }
 
     private void ShuffleData()
@@ -118,10 +126,10 @@ public class FieldViewContainer : MonoBehaviour
         GroupRaycastToggle(false);
     }
 
-    public void ShowAnswerStatus(FieldData data, bool isCorrect)
+    public void ShowAnswerStatus(FieldData data, AnswerStatus answerStatus)
     {
         for (int i = 0; i < _fieldViews.Count; i++)
-            if (_fieldViews[i].TrySetAnswerStatus(data, isCorrect))
+            if (_fieldViews[i].TrySetAnswerStatus(data, answerStatus))
                 return;
     }
 }

@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -41,10 +40,10 @@ public class FieldCanvas : MonoBehaviour
         _answerContainer.SetData(data);
     }
 
-    private void OnAnswerSelected(FieldData data, bool isCorrect)
+    private void OnAnswerSelected(FieldData data, AnswerStatus answerStatus)
     {
         _answerContainer.Hide();
         _fieldViewContainer.Show();
-        _fieldViewContainer.ShowAnswerStatus(data, isCorrect);
+        _fieldViewContainer.ShowAnswerStatus(data, answerStatus);
     }
 }

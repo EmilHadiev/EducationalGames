@@ -5,5 +5,5 @@ using UnityEngine;
 public struct AnswerOption
 {
     [field: SerializeField] public string Answer { get; private set; }
-    [field: SerializeField] public bool IsCorrect { get; private set; }
+    [field: SerializeField] public AnswerStatus IsCorrect { get; private set; }
 }

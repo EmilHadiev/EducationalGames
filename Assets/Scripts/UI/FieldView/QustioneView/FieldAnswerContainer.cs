@@ -18,7 +18,7 @@ public class FieldAnswerContainer : MonoBehaviour
 
     private IScore _score;
 
-    public event Action<FieldData, bool> Selected;
+    public event Action<FieldData, AnswerStatus> Selected;
 
     private bool _isWork;
 
@@ -83,18 +83,18 @@ public class FieldAnswerContainer : MonoBehaviour
         _answerViews = shuffler.Shuffle(_answerViews).ToArray();
     }
 
-    private void OnClicked(bool isCorrectAnswer)
+    private void OnClicked(AnswerStatus answerStatus)
     {
         if (_isWork == false)
             return;
 
-        if (isCorrectAnswer)
+        if (answerStatus == AnswerStatus.Correct)
             _score.Add();
 
-        _questionView.ShowResult(isCorrectAnswer);
+        _questionView.ShowResult(answerStatus);
 
         HideStarted();
-        Selected?.Invoke(_data, isCorrectAnswer);
+        Selected?.Invoke(_data, answerStatus);
     }
 
     private void HideStarted()

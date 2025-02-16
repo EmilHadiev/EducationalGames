@@ -16,7 +16,7 @@ public class FieldData : ScriptableObject
 
         foreach (var answer in _answerOptions)
         {
-            if (answer.IsCorrect)
+            if (answer.IsCorrect == AnswerStatus.Correct)
                 correctAnswers += 1;
         }
 

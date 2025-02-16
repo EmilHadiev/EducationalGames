@@ -20,10 +20,10 @@ public class QuestionView : MonoBehaviour
         _descriptionText.text = description;
     }
 
-    public void ShowResult(bool isCorrectAnswer)
+    public void ShowResult(AnswerStatus answerStatus)
     {
-        _answerStatusImage.color = _statusData.GetColor(isCorrectAnswer);
-        _answerStatusImage.sprite = _statusData.GetSprite(isCorrectAnswer);
+        _answerStatusImage.color = _statusData.GetColor(answerStatus);
+        _answerStatusImage.sprite = _statusData.GetSprite(answerStatus);
     }
 
     public void ResetResultView()

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 [CreateAssetMenu(menuName = "AnswerStatus", fileName ="AnswerStatus")]
 public class AnswerStatusData : ScriptableObject
@@ -9,19 +10,29 @@ public class AnswerStatusData : ScriptableObject
     [field: SerializeField] public Color CorrectAnswerColor { get; private set; }
     [field: SerializeField] public Color WrongAnswerColor { get; private set; }
 
-    public Sprite GetSprite(bool isCorrectAnswer)
+    public Sprite GetSprite(AnswerStatus answerStatus)
     {
-        if (isCorrectAnswer)
-            return CorrectAnswerSprite;
-
-        return WrongAnswerSprite;
+        switch (answerStatus)
+        {
+            case AnswerStatus.Correct:
+                return CorrectAnswerSprite;
+            case AnswerStatus.Wrong:
+                return WrongAnswerSprite;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(answerStatus));
+        };
     }
 
-    public Color GetColor(bool isCorrectAnswer)
+    public Color GetColor(AnswerStatus answerStatus)
     {
-        if (isCorrectAnswer)
-            return CorrectAnswerColor;
-
-        return WrongAnswerColor;
+        switch (answerStatus)
+        {
+            case AnswerStatus.Correct:
+                return CorrectAnswerColor;
+            case AnswerStatus.Wrong:
+                return WrongAnswerColor;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(answerStatus));
+        };
     }
 }

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 public class FieldView : MonoBehaviour, IPointerClickHandler
 {
@@ -19,6 +20,7 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
 
     private FieldData _fieldData;
     private Sequence _sequence;
+    private SoundContainer _container;
 
     private bool _isWorking;
     private bool _isClicked;
@@ -47,10 +49,11 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
         _sequence.Append(_filedDescriptionText.DOFade(1, Constants.DefaultDuration));
     }
 
-    public void Initialize(string fieldNumber, FieldData fieldData)
+    public void Initialize(string fieldNumber, FieldData fieldData, SoundContainer soundContainer)
     {
         _fieldNumberText.text = fieldNumber;
         _fieldData = fieldData;
+        _container = soundContainer;
     }
 
     public void WorkToggle(bool isWork) => _isWorking = isWork;
@@ -71,13 +74,15 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
         transform.DORotate(_defaultRotation, 0);
     }
 
-    public bool TrySetAnswerStatus(FieldData fieldData, bool isCorrect)
+    public bool TrySetAnswerStatus(FieldData fieldData, AnswerStatus answerStatus)
     {
         if (_fieldData != fieldData)
             return false;
 
-        _answerStatusImage.sprite = _answerStatusData.GetSprite(isCorrect);
-        _answerStatusImage.color = _answerStatusData.GetColor(isCorrect);
+        _answerStatusImage.sprite = _answerStatusData.GetSprite(answerStatus);
+        _answerStatusImage.color = _answerStatusData.GetColor(answerStatus);
+
+        _container.Play(answerStatus);
 
         return true;
     }
