@@ -69,6 +69,19 @@ public class FieldViewContainer : MonoBehaviour
 
     public void Hide() => _tweenHide.Restart();
 
+    public void ShowAnswerStatus(FieldData data, AnswerStatus answerStatus)
+    {
+        for (int i = 0; i < _fieldViews.Count; i++)
+            if (_fieldViews[i].TrySetAnswerStatus(data, answerStatus))
+                return;
+    }
+
+    public void Restart()
+    {
+        for (int i = 0; i < _fieldViews.Count; i++)
+            _fieldViews[i].Restart();
+    }
+
     private void GroupRaycastToggle(bool isOn)
     {
         _group.blocksRaycasts = isOn;     
@@ -124,12 +137,5 @@ public class FieldViewContainer : MonoBehaviour
     {
         FieldToggle(false);
         GroupRaycastToggle(false);
-    }
-
-    public void ShowAnswerStatus(FieldData data, AnswerStatus answerStatus)
-    {
-        for (int i = 0; i < _fieldViews.Count; i++)
-            if (_fieldViews[i].TrySetAnswerStatus(data, answerStatus))
-                return;
     }
 }

@@ -37,6 +37,11 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
         InitializeSequence();
     }
 
+    public void Restart()
+    {
+        Debug.Log("ÐÅÑÒÀÐÒ!");
+    }
+
     private void SetDescription() => _filedDescriptionText.text = _fieldData.Description;
 
     private void InitializeSequence()
