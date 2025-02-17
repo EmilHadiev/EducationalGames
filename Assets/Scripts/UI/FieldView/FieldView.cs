@@ -20,7 +20,7 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
 
     private FieldData _fieldData;
     private Sequence _sequence;
-    private SoundContainer _container;
+    private SoundContainer _soundContainer;
 
     private bool _isWorking;
     private bool _isClicked;
@@ -53,7 +53,7 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
     {
         _fieldNumberText.text = fieldNumber;
         _fieldData = fieldData;
-        _container = soundContainer;
+        _soundContainer = soundContainer;
     }
 
     public void WorkToggle(bool isWork) => _isWorking = isWork;
@@ -82,7 +82,7 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
         _answerStatusImage.sprite = _answerStatusData.GetSprite(answerStatus);
         _answerStatusImage.color = _answerStatusData.GetColor(answerStatus);
 
-        _container.Play(answerStatus);
+        _soundContainer.Play(answerStatus);
 
         return true;
     }

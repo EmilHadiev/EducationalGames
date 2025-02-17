@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class LevelSelectorContainer : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class LevelSelectorContainer : MonoBehaviour
     private const int MaxSize = 3;
 
     private List<LevelSelector> _selectors;
+    private IStateSwitcher _switcher;
 
     private void OnValidate()
     {
@@ -35,6 +37,9 @@ public class LevelSelectorContainer : MonoBehaviour
             _selectors[i].Clicked -= OnClicked;
     }
 
+    [Inject]
+    private void Constructor(IStateSwitcher switcher) => _switcher = switcher;
+
     private void CreateTemplates()
     {
         for (int i = 0; i < MaxSize; i++)
@@ -44,7 +49,7 @@ public class LevelSelectorContainer : MonoBehaviour
     private void CreateTemplate(LevelSelector levelSelectorTemplate, LevelSelectorData data)
     {
         LevelSelector levelSelector = Instantiate(levelSelectorTemplate, _container);
-        levelSelector.Initialize(data);
+        levelSelector.Initialize(data, _switcher);
         _selectors.Add(levelSelector);
     }
 
