@@ -51,6 +51,7 @@ public class LevelSelector : MonoBehaviour, IPointerClickHandler
             case LevelSelectorType.ChaseMaze:
                 break;
             case LevelSelectorType.FlashCard:
+                _switcher.Switch<FlashCardMediator>();
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(_data.LevelType));

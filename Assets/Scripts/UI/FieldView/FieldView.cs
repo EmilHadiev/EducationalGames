@@ -4,8 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Zenject;
 
+[RequireComponent(typeof(ElementRotator))]
 public class FieldView : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private TMP_Text _fieldNumberText;
@@ -14,9 +14,7 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Image _answerStatusImage;
     [SerializeField] private Color _clickedColor;
     [SerializeField] private AnswerStatusData _answerStatusData;
-    [SerializeField] private Vector3 _rotationPosition = new Vector3(0, 180, 0);
-
-    private readonly Vector3 _defaultRotation = new Vector3(0, 0, 0);
+    [SerializeField] private ElementRotator _rotator;
 
     private FieldData _fieldData;
     private Sequence _sequence;
@@ -27,7 +25,11 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
 
     public event Action<FieldData> Clicked;
 
-    private void OnValidate() => _viewImage ??= GetComponent<Image>();
+    private void OnValidate()
+    {
+        _rotator ??= GetComponent<ElementRotator>();
+        _viewImage ??= GetComponent<Image>();
+    }
 
     private void Start()
     {
@@ -48,7 +50,6 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
     {
         _sequence = DOTween.Sequence();
         _sequence.Pause();
-        _sequence.Append(transform.DORotate(_rotationPosition, Constants.DefaultDuration).SetEase(Ease.Linear));
         _sequence.Append(_viewImage.DOColor(_clickedColor, 0));
         _sequence.Append(_fieldNumberText.DOFade(0, Constants.DefaultDuration).OnComplete(OpenField));
         _sequence.Append(_filedDescriptionText.DOFade(1, Constants.DefaultDuration));
@@ -69,14 +70,14 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
             return;
 
         Clicked?.Invoke(_fieldData);
-        _sequence.Play();
+        ShowAnimations();
         _isClicked = true;
     }
 
     private void OpenField()
     {
         _fieldNumberText.gameObject.SetActive(false);
-        transform.DORotate(_defaultRotation, 0);
+        _rotator.ResetRotate();
     }
 
     public bool TrySetAnswerStatus(FieldData fieldData, AnswerStatus answerStatus)
@@ -84,11 +85,21 @@ public class FieldView : MonoBehaviour, IPointerClickHandler
         if (_fieldData != fieldData)
             return false;
 
-        _answerStatusImage.sprite = _answerStatusData.GetSprite(answerStatus);
-        _answerStatusImage.color = _answerStatusData.GetColor(answerStatus);
-
-        _soundContainer.Play(answerStatus);
+        ShowAnswerStatus(answerStatus);
 
         return true;
+    }
+
+    private void ShowAnimations()
+    {
+        _rotator.Rotate();
+        _sequence.Play();
+    }
+
+    private void ShowAnswerStatus(AnswerStatus answerStatus)
+    {
+        _answerStatusImage.sprite = _answerStatusData.GetSprite(answerStatus);
+        _answerStatusImage.color = _answerStatusData.GetColor(answerStatus);
+        _soundContainer.Play(answerStatus);
     }
 }

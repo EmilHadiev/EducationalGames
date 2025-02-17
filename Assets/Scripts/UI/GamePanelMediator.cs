@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class GamePanelMediator : MonoBehaviour, IStateSwitcher, ILevelSelectorState
 {
     [SerializeField] private Button _playButton;
-    [SerializeField] private FieldGameMediator _fieldCanvas;
     [SerializeField] private Canvas _canvas;
+    [SerializeField] private FieldGameMediator _fieldCanvas;
+    [SerializeField] private FlashCardMediator _flashCardMediator;
 
     private readonly Dictionary<Type, ILevelSelectorState> _states = new Dictionary<Type, ILevelSelectorState>();
 
@@ -24,6 +25,7 @@ public class GamePanelMediator : MonoBehaviour, IStateSwitcher, ILevelSelectorSt
     {
         _states.Add(typeof(GamePanelMediator), this);
         _states.Add(typeof(FieldGameMediator), _fieldCanvas);
+        _states.Add(typeof(FlashCardMediator), _flashCardMediator);
     }
 
     private void Start()
